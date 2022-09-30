@@ -1,7 +1,16 @@
 import React from "react";
 
-const Day = ({ day }) => {
-  return <div>{day.format()}</div>;
+const Day = ({ day, rowIndx }) => {
+  return (
+    <div className="border border-gray-200 flex flex-col">
+      <header className="flex flex-col item-center">
+        {rowIndx === 0 && (
+          <div className="text-sm mt-1">{day.format("ddd").toUpperCase()}</div>
+        )}
+        <p className="text-sm p-1 my-1 text-center">{day.format("DD")}</p>
+      </header>
+    </div>
+  );
 };
 
 export default Day;
