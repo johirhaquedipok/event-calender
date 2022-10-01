@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import React, { useContext } from "react";
 import GlobalContext from "../context/global-context";
 
@@ -12,27 +13,30 @@ const CalenderHeader = () => {
     setMonthIndex(monthIndex + 1);
   };
 
+  const handleReset = () => {
+    setMonthIndex(dayjs().month());
+  };
+
   return (
-    <header className="px-4 py-2 item-center">
+    <header className="px-4 py-2 flex item-center  ">
       {/* <img src="{logo}" alt="calender event logo" className="h-12 w-12 mr-2 " /> */}
       <h1 className="mr-10 text-xl tex-gray-500 font-bold">Calender</h1>
-      <button className="border rounded py-2 px-4 mr-5">Today</button>
-      <button>
-        <span
-          className="material-icons-outlined cursor-pointer text-gray-600 mx-2"
-          onClick={handlePrevMonth}
-        >
+      <button className="border rounded py-2 px-4 mr-5" onClick={handleReset}>
+        Today
+      </button>
+      <button onClick={handlePrevMonth}>
+        <span className="material-icons cursor-pointer text-gray-600 mx-2">
           chevron_left
         </span>
       </button>
-      <button>
-        <span
-          className="material-icons-outlined cursor-pointer text-gray-600 mx-2"
-          onClick={handleNextMonth}
-        >
+      <button onClick={handleNextMonth}>
+        <span className="material-icons cursor-pointer text-gray-600 mx-2">
           chevron_right
         </span>
       </button>
+      <h2 className="ml-4 text-xl text-gray-500 font-bold">
+        {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
+      </h2>
     </header>
   );
 };
