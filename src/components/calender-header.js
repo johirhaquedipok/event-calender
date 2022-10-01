@@ -14,7 +14,11 @@ const CalenderHeader = () => {
   };
 
   const handleReset = () => {
-    setMonthIndex(dayjs().month());
+    setMonthIndex(
+      monthIndex === dayjs().month()
+        ? monthIndex + Math.random()
+        : dayjs().month()
+    );
   };
 
   return (
@@ -25,13 +29,13 @@ const CalenderHeader = () => {
         Today
       </button>
       <button onClick={handlePrevMonth}>
-        <span className="material-icons cursor-pointer text-gray-600 mx-2">
-          chevron_left
+        <span className="material-symbols-outlined cursor-pointer text-gray-600 mx-2">
+          arrow_back_ios
         </span>
       </button>
       <button onClick={handleNextMonth}>
-        <span className="material-icons cursor-pointer text-gray-600 mx-2">
-          chevron_right
+        <span className="material-symbols-outlined cursor-pointer text-gray-600 mx-2">
+          arrow_forward_ios
         </span>
       </button>
       <h2 className="ml-4 text-xl text-gray-500 font-bold">
