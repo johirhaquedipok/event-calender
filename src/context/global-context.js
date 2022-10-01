@@ -5,6 +5,8 @@ const GlobalContext = createContext({
   setMonthIndex: (index) => {},
   smallCalenderMonth: 0,
   setSmallCalenderMonth: (index) => {},
+  daySelected: null,
+  setDaySelected: (day) => {},
 });
 
 export default GlobalContext;

@@ -5,6 +5,7 @@ import GlobalContext from "./global-context";
 const ContextWrapper = ({ children }) => {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
   const [smallCalenderMonth, setSmallCalenderMonth] = useState(null);
+  const [daySelected, setDaySelected] = useState(null);
   useEffect(() => {
     if (smallCalenderMonth !== null) {
       setMonthIndex(smallCalenderMonth);
@@ -18,6 +19,8 @@ const ContextWrapper = ({ children }) => {
         setMonthIndex,
         smallCalenderMonth,
         setSmallCalenderMonth,
+        daySelected,
+        setDaySelected,
       }}
     >
       {children}
