@@ -10,9 +10,24 @@ const labelsClass = [
 ];
 const EventModal = () => {
   const [title, setTitle] = useState("");
-  const { setShowEventModal, daySelected } = useContext(GlobalContext);
+  const { setShowEventModal, daySelected, dispatchCallEvent } =
+    useContext(GlobalContext);
   const [description, setDescription] = useState("");
   const [selectedLabel, setSelectedLabel] = useState(labelsClass[0]);
+
+  const handleSubmit = (e) => {
+    console.log("event dispatched");
+    e.preventDefault();
+    const calenderEvent = {
+      title,
+      description,
+      lable: selectedLabel,
+      day: daySelected.valueOf(),
+      id: Date.now(),
+    };
+    dispatchCallEvent({ type: "push", payload: calenderEvent });
+    setShowEventModal(false);
+  };
 
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
@@ -80,6 +95,7 @@ const EventModal = () => {
         <footer className="flex justify-end border-t p-3 mt-5">
           <button
             type="submit"
+            onClick={handleSubmit}
             className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded text-white"
           >
             save

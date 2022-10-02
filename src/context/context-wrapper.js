@@ -6,17 +6,22 @@ function savedEventsReducer(state, { type, payload }) {
   switch (type) {
     case "push":
       return [...state, payload];
-      break;
+
     case "update":
       return state.map((evt) => (evt.id !== payload.id ? payload : evt));
-      break;
+
     case "delete":
       return state.filter((evt) => evt.id !== payload.id);
-      break;
+
     default:
       throw new Error("error coming from usereducer ");
-      break;
   }
+}
+
+function initEvents() {
+  const storageEvents = localStorage.getItem("savedEvents");
+  const parsedEvents = storageEvents ? JSON.parse(storageEvents) : [];
+  return parsedEvents;
 }
 
 const ContextWrapper = ({ children }) => {
@@ -24,7 +29,16 @@ const ContextWrapper = ({ children }) => {
   const [smallCalenderMonth, setSmallCalenderMonth] = useState(null);
   const [daySelected, setDaySelected] = useState(dayjs());
   const [showEventModal, setShowEventModal] = useState(false);
-  const [savedEvents, dispatchCallEvent] = useReducer(savedEventsReducer, [], );
+  const [savedEvents, dispatchCallEvent] = useReducer(
+    savedEventsReducer,
+    [],
+    initEvents
+  );
+
+  useEffect(() => {
+    localStorage.setItem("savedEvents", JSON.stringify(savedEvents));
+  }, [savedEvents]);
+
   useEffect(() => {
     if (smallCalenderMonth !== null) {
       setMonthIndex(smallCalenderMonth);
@@ -42,6 +56,8 @@ const ContextWrapper = ({ children }) => {
         setDaySelected,
         showEventModal,
         setShowEventModal,
+        dispatchCallEvent,
+        savedEvents,
       }}
     >
       {children}
