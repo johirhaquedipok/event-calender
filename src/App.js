@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import CalenderHeader from "./components/calender-header";
-import EventModal from "./components/eventModal";
+import EventModal from "./components/event-modal";
 import Month from "./components/month";
 import Sidebar from "./components/sidebar";
 import GlobalContext from "./context/global-context";
