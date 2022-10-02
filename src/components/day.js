@@ -10,7 +10,7 @@ const Day = ({ day, rowIndx }) => {
       : "";
   };
 
-  const { setDaySelected, setShowEventModal, savedEvents } =
+  const { setDaySelected, setShowEventModal, savedEvents, setSelectedEvent } =
     useContext(GlobalContext);
 
   useEffect(() => {
@@ -37,7 +37,17 @@ const Day = ({ day, rowIndx }) => {
           setDaySelected(day);
           setShowEventModal(true);
         }}
-      ></div>
+      >
+        {dayEvents.map((evt, idx) => (
+          <div
+            key={idx}
+            onClick={() => setSelectedEvent(evt)}
+            className={`${evt.lable} p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
+          >
+            {evt.title}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

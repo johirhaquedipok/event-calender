@@ -29,6 +29,7 @@ const ContextWrapper = ({ children }) => {
   const [smallCalenderMonth, setSmallCalenderMonth] = useState(null);
   const [daySelected, setDaySelected] = useState(dayjs());
   const [showEventModal, setShowEventModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const [savedEvents, dispatchCallEvent] = useReducer(
     savedEventsReducer,
     [],
@@ -58,6 +59,8 @@ const ContextWrapper = ({ children }) => {
         setShowEventModal,
         dispatchCallEvent,
         savedEvents,
+        selectedEvent,
+        setSelectedEvent,
       }}
     >
       {children}

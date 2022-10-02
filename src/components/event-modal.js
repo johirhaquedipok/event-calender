@@ -1,19 +1,25 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/global-context";
 const labelsClass = [
-  "bg-indigo-500",
-  "bg-gray-500",
-  "bg-green-500",
-  "bg-blue-500",
-  "bg-red-500",
-  "bg-purple-500",
+  "bg-indigo-200",
+  "bg-gray-200",
+  "bg-green-200",
+  "bg-blue-200",
+  "bg-red-200",
+  "bg-purple-200",
 ];
 const EventModal = () => {
-  const [title, setTitle] = useState("");
-  const { setShowEventModal, daySelected, dispatchCallEvent } =
+  const { setShowEventModal, daySelected, dispatchCallEvent, selectedEvent } =
     useContext(GlobalContext);
-  const [description, setDescription] = useState("");
-  const [selectedLabel, setSelectedLabel] = useState(labelsClass[0]);
+  const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
+  const [description, setDescription] = useState(
+    selectedEvent ? selectedEvent.description : ""
+  );
+  const [selectedLabel, setSelectedLabel] = useState(
+    selectedEvent
+      ? labelsClass.find((lbl) => lbl === selectedEvent.lable)
+      : labelsClass[0]
+  );
 
   const handleSubmit = (e) => {
     console.log("event dispatched");
@@ -25,7 +31,11 @@ const EventModal = () => {
       day: daySelected.valueOf(),
       id: Date.now(),
     };
-    dispatchCallEvent({ type: "push", payload: calenderEvent });
+    if (selectedEvent) {
+      dispatchCallEvent({ type: "update", payload: calenderEvent });
+    } else {
+      dispatchCallEvent({ type: "push", payload: calenderEvent });
+    }
     setShowEventModal(false);
   };
 
