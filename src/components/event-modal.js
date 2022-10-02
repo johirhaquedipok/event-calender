@@ -1,6 +1,13 @@
 import React, { useContext, useState } from "react";
 import GlobalContext from "../context/global-context";
-const labelsClass = ["indigo", "gray", "green", "bule", "red", "purple"];
+const labelsClass = [
+  "bg-indigo-500",
+  "bg-gray-500",
+  "bg-green-500",
+  "bg-blue-500",
+  "bg-red-500",
+  "bg-purple-500",
+];
 const EventModal = () => {
   const [title, setTitle] = useState("");
   const { setShowEventModal, daySelected } = useContext(GlobalContext);
@@ -54,17 +61,18 @@ const EventModal = () => {
             </span>
             <div className="flex gap-x-2">
               {labelsClass.map((lblcls, i) => (
-                <span
+                <div
                   key={i}
                   onClick={() => setSelectedLabel(lblcls)}
-                  className={`bg-${lblcls}-500 w-6 h-6 rounded-full grid place-items-center`}
+                  className={`${lblcls} w-6 h-6 rounded-full grid place-items-center`}
+                  // style={{ backgroundColor: `${lblcls}` }}
                 >
                   {selectedLabel === lblcls && (
-                    <span className="material-symbols-outlined text-black text-sm">
+                    <span className="material-symbols-outlined text-white text-sm">
                       check
                     </span>
                   )}
-                </span>
+                </div>
               ))}
             </div>
           </div>
