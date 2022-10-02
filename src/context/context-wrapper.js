@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import GlobalContext from "./global-context";
 
 const ContextWrapper = ({ children }) => {
@@ -7,6 +7,7 @@ const ContextWrapper = ({ children }) => {
   const [smallCalenderMonth, setSmallCalenderMonth] = useState(null);
   const [daySelected, setDaySelected] = useState(dayjs());
   const [showEventModal, setShowEventModal] = useState(false);
+  const [savedEvents, dispatchCallEvent] = useReducer();
   useEffect(() => {
     if (smallCalenderMonth !== null) {
       setMonthIndex(smallCalenderMonth);

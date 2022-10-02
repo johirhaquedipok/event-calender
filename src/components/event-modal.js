@@ -5,6 +5,7 @@ const EventModal = () => {
   const [title, setTitle] = useState("");
   const { setShowEventModal, daySelected } = useContext(GlobalContext);
   const [description, setDescription] = useState("");
+  const [selectedLabel, setSelectedLabel] = useState(labelsClass[0]);
 
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
@@ -55,16 +56,27 @@ const EventModal = () => {
               {labelsClass.map((lblcls, i) => (
                 <span
                   key={i}
+                  onClick={() => setSelectedLabel(lblcls)}
                   className={`bg-${lblcls}-500 w-6 h-6 rounded-full grid place-items-center`}
                 >
-                  <span className="material-symbols-outlined text-black text-sm">
-                    check
-                  </span>
+                  {selectedLabel === lblcls && (
+                    <span className="material-symbols-outlined text-black text-sm">
+                      check
+                    </span>
+                  )}
                 </span>
               ))}
             </div>
           </div>
         </div>
+        <footer className="flex justify-end border-t p-3 mt-5">
+          <button
+            type="submit"
+            className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded text-white"
+          >
+            save
+          </button>
+        </footer>
       </form>
     </div>
   );
