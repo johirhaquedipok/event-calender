@@ -22,14 +22,13 @@ const EventModal = () => {
   );
 
   const handleSubmit = (e) => {
-    console.log("event dispatched");
     e.preventDefault();
     const calenderEvent = {
       title,
       description,
       lable: selectedLabel,
       day: daySelected.valueOf(),
-      id: Date.now(),
+      id: selectedEvent ? selectedEvent.id : Date.now(),
     };
     if (selectedEvent) {
       dispatchCallEvent({ type: "update", payload: calenderEvent });
@@ -46,11 +45,27 @@ const EventModal = () => {
           <span className="material-symbols-outlined text-gray-400">
             drag_handle
           </span>
-          <button onClick={() => setShowEventModal(false)}>
-            <span className="material-symbols-outlined text-gray-400">
-              close
-            </span>
-          </button>
+          <div>
+            {selectedEvent && (
+              <span
+                className="material-symbols-outlined text-gray-400 cursor-pointer"
+                onClick={() => {
+                  dispatchCallEvent({
+                    type: "delete",
+                    payload: selectedEvent,
+                  });
+                  setShowEventModal(false);
+                }}
+              >
+                delete
+              </span>
+            )}
+            <button onClick={() => setShowEventModal(false)}>
+              <span className="material-symbols-outlined text-gray-400">
+                close
+              </span>
+            </button>
+          </div>
         </header>
         <div className="p-3">
           <div className="grid gap-y-7 grid-cols-5/1 items-end">
