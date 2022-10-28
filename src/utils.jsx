@@ -3,9 +3,9 @@ import dayjs from "dayjs";
 export function getMonth(month = dayjs().month()) {
   month = Math.floor(month);
   const year = dayjs().year();
-
-  const firtsDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
-  let currentMonthCount = 0 - firtsDayOfTheMonth;
+  /* const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day(); */
+  const firstDayOfTheMonth = dayjs().startOf("month").day();
+  let currentMonthCount = 0 - firstDayOfTheMonth;
   const daysMatrix = new Array(5).fill([]).map(() => {
     return new Array(7).fill(null).map(() => {
       currentMonthCount++;

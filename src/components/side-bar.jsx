@@ -1,16 +1,16 @@
 import React from "react";
 import CreateEventButton from "./create-event-button";
-import Labels from "./Labels";
+import Label from "./labels";
 import SmallCalender from "./small-calender";
 
-const Sidebar = () => {
+const SideBar = () => {
   return (
-    <aside className="border p-5 w-64">
+    <div className="border p-5 w-64">
       <CreateEventButton />
       <SmallCalender />
-      <Labels />
-    </aside>
+      <Label />
+    </div>
   );
 };
 
-export default Sidebar;
+export default SideBar;

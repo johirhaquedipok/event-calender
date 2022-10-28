@@ -2,10 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import CalenderHeader from "./components/calender-header";
 import EventModal from "./components/event-modal";
 import Month from "./components/month";
-import Sidebar from "./components/sidebar";
+import SideBar from "./components/side-bar";
 import GlobalContext from "./context/global-context";
-import { getMonth } from "./util";
-
+import { getMonth } from "./utils";
 function App() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
   const { monthIndex, showEventModal } = useContext(GlobalContext);
@@ -17,14 +16,11 @@ function App() {
   return (
     <>
       {showEventModal && <EventModal />}
-      <div className="container mx-auto p-1 font-sans">
-        <h1 className="text-3xl font-bold text-center">Hello Event Manager</h1>
-        <div className="h-screen flex flex-col">
-          <CalenderHeader />
-          <div className="flex flex-1">
-            <Sidebar />
-            <Month month={currentMonth} />
-          </div>
+      <div className="h-screen flex flex-col">
+        <CalenderHeader />
+        <div className="flex flex-1">
+          <SideBar />
+          <Month month={currentMonth} />
         </div>
       </div>
     </>

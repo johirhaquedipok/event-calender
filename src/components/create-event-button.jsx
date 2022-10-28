@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
+import plusImg from "../assets/plus.svg";
 import GlobalContext from "../context/global-context";
 
 const CreateEventButton = () => {
   const { setShowEventModal } = useContext(GlobalContext);
   return (
     <button
-      className="border p-2 flex items-center justify-center gap-4 text-center rounded-full shadow-md hover:shadow-md cursor-pointer w-32"
       onClick={() => setShowEventModal(true)}
+      className="border p-2 rounded-full flex items-center shadow-md hover:shadow-2xl"
     >
-      <span className="material-symbols-outlined block">add</span>
-      <span className=" block">create</span>
+      <img src={plusImg} alt="create_event" className="w-7 h-7" />
+      <span className="pl-3 pr-7"> Create</span>
     </button>
   );
 };
